@@ -5,8 +5,8 @@ Ejemplo de cómo un agente LangChain puede planificar y ejecutar pasos usando he
 """
 
 # Requiere: pip install langchain openai
-from langchain.llms import OpenAI
-from langchain.agents import initialize_agent, Tool, AgentType
+from langchain_openai import OpenAI
+from langchain_classic.agents import initialize_agent, Tool, AgentType
 import os
 
 # Configura tu API key de OpenAI

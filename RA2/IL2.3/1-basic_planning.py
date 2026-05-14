@@ -10,7 +10,7 @@ from langchain_classic.agents import initialize_agent, Tool, AgentType
 import os
 
 # Configura tu API key de OpenAI
-os.environ["GITHUB_TOKEN"] = "github_pat_..."
+os.environ["GITHUB_TOKEN"] = os.environ.get("GITHUB_TOKEN")
 
 # Herramienta personalizada: pasos para preparar café
 def pasos_cafe(_):
@@ -25,7 +25,7 @@ herramienta_cafe = Tool(
 # Inicializa el LLM y el agente
 llm = ChatOpenAI(
     model="openai/gpt-4o-mini",
-    api_key=os.environ["GITHUB_TOKEN"],
+    api_key=os.environ.get("GITHUB_TOKEN"),
     base_url="https://models.github.ai/inference",
     temperature=0
 )

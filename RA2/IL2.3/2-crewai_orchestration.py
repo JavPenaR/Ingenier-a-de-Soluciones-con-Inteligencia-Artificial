@@ -9,7 +9,7 @@ from crewai import Agent, Task, Crew
 from crewai import LLM
 import os
 
-os.environ["GITHUB_TOKEN"] = "github_pat_..."
+
 
 # LLM compatible con GitHub Models
 llm = LLM(

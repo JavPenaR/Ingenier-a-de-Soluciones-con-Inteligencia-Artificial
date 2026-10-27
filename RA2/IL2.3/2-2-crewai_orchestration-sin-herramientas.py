@@ -1,25 +1,29 @@
 """
-IL2.3: Orquestación Multi-Agente con CrewAI
-==========================================
-Ejemplo de cómo dos agentes CrewAI colaboran para resolver una tarea.
+IL2.3: Orquestación Multi-Agente con CrewAI (SIN herramientas)
+=============================================================
+Versión anterior, para comparar: el investigador no tiene herramientas,
+así que "investiga" solo con lo que sabe el modelo y puede inventar datos.
+Compárala con 2-3-crewai_orchestration.py, donde el investigador usa Wikipedia.
 """
 
-# Requiere: pip install crewai
+# Requiere: pip install crewai python-dotenv
 from crewai import Agent, Task, Crew
 from crewai import LLM
 import os
+from dotenv import load_dotenv
 
+load_dotenv()  # Carga GROQ_BASE_URL y GROQ_API_KEY desde el archivo .env
 
-
-# LLM compatible con GitHub Models
+# LLM vía Groq, usando el proveedor "openai" de CrewAI con la URL de Groq.
+# El primer "openai/" es el proveedor; "openai/gpt-oss-120b" es el modelo en Groq.
 llm = LLM(
-    model="openai/gpt-4o-mini",
-    api_key=os.environ["GITHUB_TOKEN"],
-    base_url="https://models.github.ai/inference",
+    model="openai/openai/gpt-oss-120b",
+    api_key=os.environ["GROQ_API_KEY"],
+    base_url=os.environ["GROQ_BASE_URL"],
     temperature=0
 )
 
-# Agente 1: Investigador
+# Agente 1: Investigador (sin herramientas)
 investigador = Agent(
     role="Investigador",
     goal="Buscar información completa sobre una capital del mundo",
@@ -57,5 +61,5 @@ crew = Crew(
 )
 
 if __name__ == "__main__":
-    print("Orquestación multi-agente con CrewAI:")
-    print(crew.kickoff()) 
+    print("Orquestación multi-agente con CrewAI (sin herramientas):")
+    print(crew.kickoff()) #iniciar la orquestación multi-agente desencadenando las tareas 

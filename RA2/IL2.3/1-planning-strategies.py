@@ -52,7 +52,7 @@ class Plan:
         self.estimated_total_duration = sum(step.estimated_duration for step in self.steps)
 
 
-class Planner(ABC):
+class Planner(ABC): #contiene 3 estrategias de planificación: jerárquica, reactiva y orientada a objetivos
     """Planificador base"""
     
     def __init__(self, name: str):

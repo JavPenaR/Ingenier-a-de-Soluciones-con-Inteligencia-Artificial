@@ -1,16 +1,16 @@
 """
 IL2.3: Planificación Básica con LangChain
 ========================================
-Ejemplo de cómo un agente LangChain puede planificar y ejecutar pasos simples usando una herramienta.
+Ejemplo de cómo un agente react en LangChain puede planificar y ejecutar pasos simples usando una herramienta.
 """
 
-# Requiere: pip install langchain openai
+# Requiere: pip install langchain langchain-openai python-dotenv
 from langchain_openai import ChatOpenAI
 from langchain_classic.agents import initialize_agent, Tool, AgentType
 import os
+from dotenv import load_dotenv
 
-# Configura tu API key de OpenAI
-os.environ["GITHUB_TOKEN"] = os.environ.get("GITHUB_TOKEN")
+load_dotenv()  # Carga GROQ_BASE_URL y GROQ_API_KEY desde el archivo .env
 
 # Herramienta personalizada: pasos para preparar café
 def pasos_cafe(_):
@@ -24,9 +24,9 @@ herramienta_cafe = Tool(
 
 # Inicializa el LLM y el agente
 llm = ChatOpenAI(
-    model="openai/gpt-4o-mini",
-    api_key=os.environ.get("GITHUB_TOKEN"),
-    base_url="https://models.github.ai/inference",
+    model="openai/gpt-oss-120b",
+    api_key=os.environ.get("GROQ_API_KEY"),
+    base_url=os.environ.get("GROQ_BASE_URL"),
     temperature=0
 )
 agente = initialize_agent(
@@ -36,6 +36,6 @@ agente = initialize_agent(
     verbose=True
 )
 
-if __name__ == "__main__":
+if __name__ == "__main__": #si el archivo se ejecuta directamente, 
     print("Planificación con LangChain:")
     print(agente.run("¿Cuáles son los pasos para preparar café?")) 

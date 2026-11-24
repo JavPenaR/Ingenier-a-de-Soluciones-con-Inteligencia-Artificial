@@ -11,6 +11,7 @@ Recomendaciones básicas para escalar y mantener agentes de IA.
 # - Documenta y automatiza los despliegues.
 # - Monitorea el consumo de recursos y ajusta según demanda.
 
+# Clase para un agente escalable y procesar tareas donde se imprime cada resultado
 class ScalableAgent:
     def process(self, data):
         # Simula procesamiento escalable
